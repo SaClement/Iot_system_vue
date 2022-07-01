@@ -5,18 +5,14 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Components: typeof import('./src/components/common/ElementProvider/components/index.vue')['default']
-    ElementProvider: typeof import('./src/components/common/ElementProvider/index.vue')['default']
-    ElementProviderContent: typeof import('./src/components/common/ElementProvider/components/ElementProviderContent.vue')['default']
+    DarkModeContainer: typeof import('./src/components/common/DarkModeContainer/index.vue')['default']
+    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    HoverContainer: typeof import('./src/components/common/HoverContainer/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Svg: typeof import('./src/components/svg/index.vue')['default']
-    SvgBanner: typeof import('./src/components/svg/SvgBanner.vue')['default']
-    SvgEmptyData: typeof import('./src/components/svg/SvgEmptyData.vue')['default']
-    SvgNetworkError: typeof import('./src/components/svg/SvgNetworkError.vue')['default']
-    SvgNoPermission: typeof import('./src/components/svg/SvgNoPermission.vue')['default']
-    SvgNotFound: typeof import('./src/components/svg/SvgNotFound.vue')['default']
-    SvgServiceError: typeof import('./src/components/svg/SvgServiceError.vue')['default']
+    SvgFillLogo: typeof import('./src/components/common/SystemLogo/components/SvgFillLogo.vue')['default']
+    SvgLogo: typeof import('./src/components/common/SystemLogo/components/SvgLogo.vue')['default']
+    SystemLogo: typeof import('./src/components/common/SystemLogo/index.vue')['default']
   }
 }
 
