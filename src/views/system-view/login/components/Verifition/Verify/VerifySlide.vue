@@ -4,7 +4,6 @@ import type { Verify } from "@/interface";
 import { aesEncrypt } from "./../utils/ase"
 import { resetSize } from './../utils/util'
 import { fetchReqGet, fetchReqCheck } from "@/service";
-import { log } from "console";
 
 const props = withDefaults(defineProps<Verify>(), {
   captchaType: null,

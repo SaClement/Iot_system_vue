@@ -2,7 +2,6 @@
 import { computed, ref, watch } from "vue";
 import type { Verify } from "@/interface";
 import { VerifySlide, VerifyPoints } from './Verify'
-import { watch } from "fs/promises";
 
 const props = withDefaults(defineProps<Verify>(), {
   locale: navigator.language,
