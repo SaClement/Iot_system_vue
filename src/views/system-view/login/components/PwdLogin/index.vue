@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { ElButton, ElInput, ElForm, ElFormItem, ElSpace, ElCheckbox } from 'element-plus';
 import { reactive, ref } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { EnumLoginModule } from '@/enum';
@@ -62,7 +61,7 @@ function handleSubmit(e: MouseEvent) {
       >
         确定
       </el-button>
-      <div class="bc_space-box bc_btn-box">
+      <!-- <div class="bc_space-box bc_btn-box">
         <el-button  @click="toLoginModule('code-login')">
           {{ EnumLoginModule['code-login'] }}
         </el-button>
@@ -70,7 +69,7 @@ function handleSubmit(e: MouseEvent) {
         <el-button  @click="toLoginModule('register')">
           {{ EnumLoginModule.register }}
         </el-button>
-      </div>
+      </div> -->
     </el-space>
     <!-- <other-login /> -->
   </el-form>

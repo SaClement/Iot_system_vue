@@ -1,4 +1,4 @@
-import { mockRequest } from '../request';
+import { request } from '../request';
 
 /**
  * 获取验证码
@@ -6,7 +6,7 @@ import { mockRequest } from '../request';
  * @returns - 返回boolean值表示是否发送成功
  */
 export function fetchSmsCode(phone: string) {
-  return mockRequest.post<boolean>('/getSmsCode', { phone });
+  return request.post<boolean>('/getSmsCode', { phone });
 }
 
 /**
@@ -17,14 +17,14 @@ export function fetchSmsCode(phone: string) {
  */
 export function fetchLogin(phone: string, pwdOrCode: string, type: 'pwd' | 'sms') {
   if (type === 'pwd') {
-    return mockRequest.post<ApiAuth.Token>('/loginByPwd', { phone, pwd: pwdOrCode });
+    return request.post<ApiAuth.Token>('/loginByPwd', { phone, pwd: pwdOrCode });
   }
-  return mockRequest.post<ApiAuth.Token>('/loginByCode', { phone, code: pwdOrCode });
+  return request.post<ApiAuth.Token>('/loginByCode', { phone, code: pwdOrCode });
 }
 
 /** 获取用户信息 */
 export function fetchUserInfo() {
-  return mockRequest.get<ApiAuth.UserInfo>('/getUserInfo');
+  return request.get<ApiAuth.UserInfo>('/getUserInfo');
 }
 
 /**
@@ -33,13 +33,23 @@ export function fetchUserInfo() {
  * @description 后端根据用户id查询到对应的角色类型，并将路由筛选出对应角色的路由数据返回前端
  */
 export function fetchUserRoutes(userId: string) {
-  return mockRequest.post<ApiRoute.Route>('/getUserRoutes', { userId });
+  return request.post<ApiRoute.Route>('/getUserRoutes', { userId });
 }
 
 export function fetchTestToken() {
-  return mockRequest.post('/testToken', { userName: 'Soybean' });
+  return request.post('/testToken', { userName: 'Soybean' });
 }
 
 export function fetchUpdateToken(refreshToken: string) {
-  return mockRequest.post('/updateToken', { refreshToken });
+  return request.post('/updateToken', { refreshToken });
+}
+
+//获取验证图片  以及token
+export function fetchReqGet(data: any) {
+  return request.post<ApiAuth.Token>('/captcha/get', data);
+}
+
+//滑动或者点选验证
+export function fetchReqCheck(data: any) {
+  return request.post<ApiAuth.Token>('/captcha/check', data);
 }
