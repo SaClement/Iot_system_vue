@@ -1,10 +1,11 @@
 <script setup lang='ts'>
-import { reactive, ref } from 'vue';
+import { getCurrentInstance, onMounted, reactive, ref } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { EnumLoginModule } from '@/enum';
 import { useAuthStore } from '@/store';
 import { useRouterPush } from '@/composables';
 import { formRules } from '@/utils';
+import { log } from 'console';
 // import { OtherLogin } from './components';
 
 const auth = useAuthStore();

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed } from 'vue';
+import { computed, getCurrentInstance, onMounted, ref } from 'vue';
 import type { Component } from 'vue';
 import { EnumLoginModule } from '@/enum';
 // import { SystemLogo, DarkModeSwitch } from '@/components';
@@ -7,7 +7,7 @@ import { useThemeStore } from '@/store';
 import { useAppInfo } from '@/composables';
 import { getColorPalette, mixColor } from '@/utils';
 import type { LoginModuleKey } from '@/interface';
-import { LoginBg, PwdLogin } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
+import { LoginBg, PwdLogin, Verifition } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
 import { ElCard } from 'element-plus'
 
 interface Props {
@@ -75,7 +75,9 @@ const bgColor = computed(() => {
         </main>
       </div>
     </el-card>
-    <login-bg :theme-color="bgThemeColor" />
+    <login-bg :theme-color="bgThemeColor" ref="loginBox"/>
+
+    <verifition></verifition>
   </div>
 </template>
 
