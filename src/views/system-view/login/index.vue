@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, getCurrentInstance, onMounted, ref } from 'vue';
+import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue';
 import type { Component } from 'vue';
 import { EnumLoginModule } from '@/enum';
 // import { SystemLogo, DarkModeSwitch } from '@/components';
@@ -51,6 +51,16 @@ const bgColor = computed(() => {
   const ratio = theme.darkMode ? 0.5 : 0.2;
   return mixColor(COLOR_WHITE, theme.themeColor, ratio);
 });
+
+const loginBox = ref(null)
+
+function handleLogin() {
+
+}
+
+onMounted(() => {
+  console.log(loginBox)
+})
 </script>
 
 <template>
@@ -75,9 +85,17 @@ const bgColor = computed(() => {
         </main>
       </div>
     </el-card>
+
     <login-bg :theme-color="bgThemeColor" ref="loginBox"/>
 
-    <verifition></verifition>
+    <verifition 
+      @success="handleLogin"
+      :mode="'fixed'"
+      :explain="'向右滑动验证登录'"
+      :captchaType="'blockPuzzle'"
+      :imgSize="{width:'340px',height:'200px'}"
+      ref="verify">
+    </verifition>
   </div>
 </template>
 

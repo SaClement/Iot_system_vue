@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { computed, onMounted, ref, watch } from "vue";
-import { VerifySlide, VerifyPoints } from "./Verify";
+import { VerifySlide, VerifyPoints } from "./components";
 
 interface VerifyItemSize {
   // 验证组件各个模块的宽度
@@ -9,10 +9,10 @@ interface VerifyItemSize {
   height: string;
 }
 
-type CaptchaType = "blockPuzzle" | "clickWord" | null
+type CaptchaType = "blockPuzzle" | "clickWord" | null;
 
-interface Proxy {
-  locale: string;
+interface Props {
+  locale?: string;
   captchaType: CaptchaType;
   figure?: number | null;
   arith?: number | null;
@@ -24,7 +24,7 @@ interface Proxy {
   barSize?: VerifyItemSize;
 }
 
-const props = withDefaults(defineProps<Proxy>(), {
+const props = withDefaults(defineProps<Props>(), {
   locale: navigator.language,
   captchaType: "blockPuzzle",
   figure: null,
@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<Proxy>(), {
   },
 });
 
-const instance = ref<HTMLDivElement>();
+const instance = ref(null);
 const clickShow = ref(false);
 const verifyType = ref<string>("");
 const showBox = computed(() => (props.mode == "pop" ? clickShow : true));
@@ -51,14 +51,14 @@ const componentType = computed(() => {
   return props.captchaType == "blockPuzzle" ? VerifySlide : VerifyPoints;
 });
 
-const closeBox = () => {
+function closeBox() {
   clickShow.value = false;
   refresh();
 }
 
-const refresh = () => {
-  if (instance?.value?.refresh) {
-    instance?.value?.refresh();
+function refresh() {
+  if (instance.value) {
+    (instance.value as any).refresh();
   }
 }
 
@@ -75,10 +75,7 @@ watch(
     }
   }
 );
-
-onMounted(() => {
-  console.log(instance,'instance')
-})
+onMounted(() => {});
 </script>
 
 <template>
@@ -113,7 +110,7 @@ onMounted(() => {
             :blockSize="blockSize"
             :barSize="barSize"
             ref="instance"
-          ></component>
+          />
         </keep-alive>
       </div>
     </div>

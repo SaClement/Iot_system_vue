@@ -15,6 +15,7 @@ export function getLayoutComponent(layoutType: LayoutComponentName) {
     basic: BasicLayout,
     blank: BlankLayout
   };
+  console.log(layoutComponent[layoutType])
   return () => setViewComponentName(layoutComponent[layoutType], EnumLayoutComponentName[layoutType]);
 }
 

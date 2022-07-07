@@ -21,8 +21,6 @@ import {
 } from "./../utils/util";
 import { aesEncrypt } from "./../utils/ase";
 import { fetchReqGet, fetchReqCheck } from "@/service";
-import { Interface } from "readline";
-import { nextTick } from "process";
 
 interface VerifyItemSize {
   // 验证组件各个模块的宽度
@@ -33,7 +31,7 @@ interface VerifyItemSize {
 
 type CaptchaType = "blockPuzzle" | "clickWord" | null
 
-interface Proxy {
+interface Props {
   locale?: string;
   captchaType: CaptchaType;
   figure?: number | null;
@@ -46,7 +44,7 @@ interface Proxy {
   barSize?: VerifyItemSize;
 }
 
-const props = withDefaults(defineProps<Proxy>(), {
+const props = withDefaults(defineProps<Props>(), {
   mode: "fixed",
   type: "1",
   captchaType: null,
@@ -129,30 +127,30 @@ function canvasClick(e: MouseEvent) {
           : JSON.stringify(checkPosArr),
         token: backToken,
       };
-      // fetchReqCheck(data).then((result) => {
-      //   let res = result.data;
-      //   if (res && res.repCode == "0000") {
-      //     barAreaColor.value = "#4cae4c";
-      //     barAreaBorderColor.value = "#5cb85c";
-      //     text.value = "验证成功";
-      //     bindingClick.value = false;
-      //     if (props.mode == "pop") {
-      //       setTimeout(() => {
-      //         proxy.parent.clickShow = false;
-      //         refresh();
-      //       }, 1500);
-      //     }
-      //     proxy.parent.emit("success", { captchaVerification });
-      //   } else {
-      //     proxy.parent.emit("error", proxy);
-      //     barAreaColor.value = "#d9534f";
-      //     barAreaBorderColor.value = "#d9534f";
-      //     text.value = "验证失败";
-      //     setTimeout(() => {
-      //       refresh();
-      //     }, 700);
-      //   }
-      // });
+      fetchReqCheck(data).then((result) => {
+        let res = result.data;
+        // if (res && res.repCode == "0000") {
+        //   barAreaColor.value = "#4cae4c";
+        //   barAreaBorderColor.value = "#5cb85c";
+        //   text.value = "验证成功";
+        //   bindingClick.value = false;
+        //   if (props.mode == "pop") {
+        //     setTimeout(() => {
+        //       proxy.parent.clickShow = false;
+        //       refresh();
+        //     }, 1500);
+        //   }
+        //   proxy.parent.emit("success", { captchaVerification });
+        // } else {
+        //   proxy.parent.emit("error", proxy);
+        //   barAreaColor.value = "#d9534f";
+        //   barAreaBorderColor.value = "#d9534f";
+        //   text.value = "验证失败";
+        //   setTimeout(() => {
+        //     refresh();
+        //   }, 700);
+        // }
+      });
     }, 400);
   }
   if (num < checkNum) {
@@ -191,18 +189,18 @@ function getPictrue() {
   let data = {
     captchaType: props.captchaType,
   };
-  // fetchReqGet(data).then((result) => {
-  //   let res = result.data;
-  //   if (res && res.token == "0000") {
-  //     pointBackImgBase.value = res.token.originalImageBase64;
-  //     backToken.value = res.token.token;
-  //     secretKey.value = res.token.secretKey;
-  //     poinTextList = res.token.wordList;
-  //     text.value = "请依次点击【" + poinTextList.join(",") + "】";
-  //   } else {
-  //     text.value = res.repMsg;
-  //   }
-  // });
+  fetchReqGet(data).then((result) => {
+    let res = result.data;
+    // if (res && res.token == "0000") {
+    //   pointBackImgBase.value = res.token.originalImageBase64;
+    //   backToken.value = res.token.token;
+    //   secretKey.value = res.token.secretKey;
+    //   poinTextList = res.token.wordList;
+    //   text.value = "请依次点击【" + poinTextList.join(",") + "】";
+    // } else {
+    //   text.value = res.repMsg;
+    // }
+  });
 }
 
 //坐标转换函数

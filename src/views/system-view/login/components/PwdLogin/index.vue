@@ -1,36 +1,35 @@
 <script setup lang='ts'>
-import { getCurrentInstance, onMounted, reactive, ref } from 'vue';
-import type { FormInstance, FormRules } from 'element-plus';
-import { EnumLoginModule } from '@/enum';
-import { useAuthStore } from '@/store';
-import { useRouterPush } from '@/composables';
-import { formRules } from '@/utils';
-import { log } from 'console';
+import { reactive, ref } from "vue";
+import type { FormInstance, FormRules } from "element-plus";
+import { EnumLoginModule } from "@/enum";
+import { useAuthStore } from "@/store";
+import { useRouterPush } from "@/composables";
+import { formRules } from "@/utils";
 // import { OtherLogin } from './components';
 
 const auth = useAuthStore();
 const { login } = useAuthStore();
 const { toLoginModule } = useRouterPush();
 
-const formRef = ref<(HTMLElement & FormInstance) | null>(null);
+const formRef = ref<FormInstance | null>(null);
 const model = reactive({
-  phone: '15170283876',
-  pwd: 'abc123456'
+  phone: "15170283876",
+  pwd: "abc123456",
 });
 const rules: FormRules = {
   phone: formRules.phone,
-  pwd: formRules.pwd
+  pwd: formRules.pwd,
 };
 const rememberMe = ref(false);
 
-function handleSubmit(e: MouseEvent) {
-  if (!formRef.value) return;
-  e.preventDefault();
-
-  formRef.value.validate(errors => {
-    if (!errors) {
+async function handleSubmit(formEl: FormInstance | null) {
+  if (!formEl) return;
+  await formEl.validate((valid, fields) => {
+    if (valid) {
       const { phone, pwd } = model;
-      login(phone, pwd, 'pwd');
+      login(phone, pwd, "pwd");
+    }else{
+      console.log(fields)
     }
   });
 }
@@ -42,23 +41,35 @@ function handleSubmit(e: MouseEvent) {
       <el-input v-model="model.phone" placeholder="请输入手机号码" />
     </el-form-item>
     <el-form-item prop="pwd" label="密码">
-      <el-input v-model="model.pwd" type="password" :show-password="true" placeholder="请输入密码" />
+      <el-input
+        v-model="model.pwd"
+        type="password"
+        :show-password="true"
+        placeholder="请输入密码"
+      />
     </el-form-item>
     <el-space
       fill
       wrap
       direction="vertical"
-      style="width: 100%" class="bc_space-mian">
+      style="width: 100%"
+      class="bc_space-mian"
+    >
       <div class="bc_space-box">
         <el-checkbox @checked="rememberMe">记住我</el-checkbox>
-        <el-button :text="true" :plain="true" @click="toLoginModule('reset-pwd')">忘记密码？</el-button>
+        <el-button
+          :text="true"
+          :plain="true"
+          @click="toLoginModule('reset-pwd')"
+          >忘记密码？</el-button
+        >
       </div>
       <el-button
         type="primary"
         size="large"
         :round="true"
         :loading="auth.loginLoding"
-        @click="handleSubmit"
+        @click="handleSubmit(formRef)"
       >
         确定
       </el-button>
@@ -77,19 +88,19 @@ function handleSubmit(e: MouseEvent) {
 </template>
 
 <style lang='scss' scoped>
-.bc_space-box{
+.bc_space-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.bc_btn-box{
+.bc_btn-box {
   .el-button {
     flex: 1;
   }
 }
 
-.bc_block-button{
+.bc_block-button {
   width: 100%;
 }
 </style>

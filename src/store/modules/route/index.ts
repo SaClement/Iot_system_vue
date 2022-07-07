@@ -42,12 +42,14 @@ export const useRouteStore = defineStore('route-store', {
       const { userId } = getUserInfo();
       if (!userId) return;
       const { data } = await fetchUserRoutes(userId);
+      console.log(data)
       if (data) {
         this.routeHomeName = data.home;
         this.menus = transformAuthRouteToMenu(data.routes);
         this.menusList = transformRouteToList(data.routes);
 
         const vueRoutes = transformAuthRoutesToVueRoutes(data.routes);
+        console.log(vueRoutes,'vueRoutes')
         vueRoutes.forEach(route => {
           router.addRoute(route);
         });

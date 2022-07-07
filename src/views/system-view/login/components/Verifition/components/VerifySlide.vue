@@ -1,20 +1,9 @@
 <script lang="ts" setup>
-import {
-  ref,
-  computed,
-  nextTick,
-  reactive,
-  watch,
-  getCurrentInstance,
-  onMounted,
-  toRef,
-  defineExpose
-} from "vue";
+import { ref, computed, reactive, watch, onMounted, defineExpose } from "vue";
 import type { BoxSize } from "@/interface";
 import { aesEncrypt } from "./../utils/ase";
 import { resetSize } from "./../utils/util";
 import { fetchReqGet, fetchReqCheck } from "@/service";
-import { emit } from "process";
 
 interface VerifyItemSize {
   // 验证组件各个模块的宽度
@@ -23,10 +12,11 @@ interface VerifyItemSize {
   height: string;
 }
 
-type CaptchaType = "blockPuzzle" | "clickWord" | null
+type CaptchaType = "blockPuzzle" | "clickWord" | null;
 
-interface Proxy {
+interface Props {
   locale?: string;
+  type?: string;
   captchaType: CaptchaType;
   figure?: number | null;
   arith?: number | null;
@@ -38,7 +28,7 @@ interface Proxy {
   barSize?: VerifyItemSize;
 }
 
-const props = withDefaults(defineProps<Proxy>(), {
+const props = withDefaults(defineProps<Props>(), {
   captchaType: null,
   type: "1",
   mode: "fixed",
@@ -63,7 +53,7 @@ const props = withDefaults(defineProps<Proxy>(), {
     };
   },
 });
-const verifySlide = ref<HTMLDivElement>()
+const verifySlide = ref<HTMLDivElement>();
 const secretKey = ref(""); //后端返回的加密秘钥 字段
 const passFlag = ref<boolean>(false); //是否通过的标识
 const backImgBase = ref<string>(""); //验证码背景图片
@@ -149,12 +139,12 @@ function init() {
 }
 
 //鼠标按下
-function start(e: TouchEvent): void
-function start(e: MouseEvent): void
+function start(e: TouchEvent): void;
+function start(e: MouseEvent): void;
 function start(e: MouseEvent | TouchEvent): void {
   e = e || window.event;
-  const { clientX } = <MouseEvent>e
-  const { touches } = <TouchEvent>e
+  const { clientX } = <MouseEvent>e;
+  const { touches } = <TouchEvent>e;
   if (!touches) {
     //兼容PC端
     var x = clientX;
@@ -174,12 +164,12 @@ function start(e: MouseEvent | TouchEvent): void {
   }
 }
 //鼠标移动
-function move(e: TouchEvent): void
-function move(e: MouseEvent): void
+function move(e: TouchEvent): void;
+function move(e: MouseEvent): void;
 function move(e: MouseEvent | TouchEvent) {
   e = e || window.event;
-  const { clientX } = <MouseEvent>e
-  const { touches } = <TouchEvent>e
+  const { clientX } = <MouseEvent>e;
+  const { touches } = <TouchEvent>e;
   // if (status.value && isEnd.value == false) {
   //   if (!touches) {
   //     //兼容PC端
@@ -217,8 +207,7 @@ function end() {
     var moveLeftDistance = parseInt(
       (moveBlockLeft.value || "").replace("px", "")
     );
-    moveLeftDistance =
-      (moveLeftDistance * 310) / setSize.imgWidth;
+    moveLeftDistance = (moveLeftDistance * 310) / setSize.imgWidth;
     let data = {
       captchaType: props.captchaType,
       pointJson: secretKey.value
@@ -232,65 +221,65 @@ function end() {
         : JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
       token: backToken,
     };
-    // fetchReqGet(data).then((result) => {
-    //   let res = result.data;
-    //   if (res && res.repCode == "0000") {
-    //     moveBlockBackgroundColor.value = "#5cb85c";
-    //     leftBarBorderColor.value = "#5cb85c";
-    //     iconColor.value = "#fff";
-    //     iconClass.value = "icon-check";
-    //     showRefresh.value = false;
-    //     isEnd.value = true;
-    //     if (props.mode == "pop") {
-    //       setTimeout(() => {
-    //         verifySlide?.proxy?.$parent.clickShow = false;
-    //         refresh();
-    //       }, 1500);
-    //     }
-    //     passFlag.value = true;
-    //     tipWords.value = `${(
-    //       (Number(endMovetime.value) - Number(startMoveTime.value)) /
-    //       1000
-    //     ).toFixed(2)}s验证成功`;
-    //     var captchaVerification = secretKey.value
-    //       ? aesEncrypt(
-    //           backToken.value +
-    //             "---" +
-    //             JSON.stringify({
-    //               x: moveLeftDistance,
-    //               y: 5.0,
-    //             }),
-    //           secretKey.value
-    //         )
-    //       : backToken.value +
-    //         "---" +
-    //         JSON.stringify({ x: moveLeftDistance, y: 5.0 });
-    //     setTimeout(() => {
-    //       tipWords.value = "";
-    //       verifySlide?.closeBox();
-    //       verifySlide?.emit("success", { captchaVerification });
-    //     }, 1000);
-    //   } else {
-    //     moveBlockBackgroundColor.value = "#d9534f";
-    //     leftBarBorderColor.value = "#d9534f";
-    //     iconColor.value = "#fff";
-    //     iconClass.value = "icon-close";
-    //     passFlag.value = false;
-    //     setTimeout(function () {
-    //       refresh();
-    //     }, 1000);
-    //     verifySlide?.emit("error", verifySlide);
-    //     tipWords.value = "验证失败";
-    //     setTimeout(() => {
-    //       tipWords.value = "";
-    //     }, 1000);
-    //   }
-    // });
+    fetchReqGet(data).then((result) => {
+      let res = result.data;
+      //   if (res && res.repCode == "0000") {
+      //     moveBlockBackgroundColor.value = "#5cb85c";
+      //     leftBarBorderColor.value = "#5cb85c";
+      //     iconColor.value = "#fff";
+      //     iconClass.value = "icon-check";
+      //     showRefresh.value = false;
+      //     isEnd.value = true;
+      //     if (props.mode == "pop") {
+      //       setTimeout(() => {
+      //         verifySlide?.proxy?.$parent.clickShow = false;
+      //         refresh();
+      //       }, 1500);
+      //     }
+      //     passFlag.value = true;
+      //     tipWords.value = `${(
+      //       (Number(endMovetime.value) - Number(startMoveTime.value)) /
+      //       1000
+      //     ).toFixed(2)}s验证成功`;
+      //     var captchaVerification = secretKey.value
+      //       ? aesEncrypt(
+      //           backToken.value +
+      //             "---" +
+      //             JSON.stringify({
+      //               x: moveLeftDistance,
+      //               y: 5.0,
+      //             }),
+      //           secretKey.value
+      //         )
+      //       : backToken.value +
+      //         "---" +
+      //         JSON.stringify({ x: moveLeftDistance, y: 5.0 });
+      //     setTimeout(() => {
+      //       tipWords.value = "";
+      //       verifySlide?.closeBox();
+      //       verifySlide?.emit("success", { captchaVerification });
+      //     }, 1000);
+      //   } else {
+      //     moveBlockBackgroundColor.value = "#d9534f";
+      //     leftBarBorderColor.value = "#d9534f";
+      //     iconColor.value = "#fff";
+      //     iconClass.value = "icon-close";
+      //     passFlag.value = false;
+      //     setTimeout(function () {
+      //       refresh();
+      //     }, 1000);
+      //     verifySlide?.emit("error", verifySlide);
+      //     tipWords.value = "验证失败";
+      //     setTimeout(() => {
+      //       tipWords.value = "";
+      //     }, 1000);
+      // }
+    });
     status.value = false;
   }
 }
 
-const refresh = () => {
+function refresh() {
   showRefresh.value = true;
   finishText.value = "";
 
@@ -319,17 +308,17 @@ function getPictrue() {
   let data = {
     captchaType: props.captchaType,
   };
-  // fetchReqGet(data).then((result) => {
-  //   let res = result.data;
-  //   if (res?.code == "0000") {
-  //     backImgBase.value = res.repData.originalImageBase64;
-  //     blockBackImgBase.value = res.repData.jigsawImageBase64;
-  //     backToken.value = res.repData.token;
-  //     secretKey.value = res.repData.secretKey;
-  //   } else {
-  //     tipWords.value = res.repMsg;
-  //   }
-  // });
+  fetchReqGet(data).then((result) => {
+    let res = result.data;
+    // if (res?.code == "0000") {
+    //   backImgBase.value = res.repData.originalImageBase64;
+    //   blockBackImgBase.value = res.repData.jigsawImageBase64;
+    //   backToken.value = res.repData.token;
+    //   secretKey.value = res.repData.secretKey;
+    // } else {
+    //   tipWords.value = res.repMsg;
+    // }
+  });
 }
 
 watch(
@@ -341,10 +330,11 @@ watch(
   { immediate: true }
 );
 
-defineExpose({ refresh });
+defineExpose({
+  refresh,
+});
 
 onMounted(() => {
-  console.log(verifySlide)
   // verifySlide.value.onselectstart = function () {
   //   return false;
   // };
