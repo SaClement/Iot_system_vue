@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import { EnumLoginModule } from "@/enum";
 import { useAuthStore } from "@/store";

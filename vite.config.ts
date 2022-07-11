@@ -9,7 +9,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig(configEnv => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd());
-  
+
   return {
     base: viteEnv.BASE_URL,
     resolve: {
@@ -21,8 +21,16 @@ export default defineConfig(configEnv => {
     define,
     plugins: [
       setupVitePlugins(configEnv),
-      AutoImport({ resolvers: [ElementPlusResolver()] }),
-      Components({ resolvers: [ElementPlusResolver()] })
+      AutoImport({
+        imports: ['vue', '@vueuse/core', 'vue-router'],
+        dts: 'src/auto-imports.d.ts',
+      }),
+      Components({
+        resolvers: [
+          ElementPlusResolver(),
+        ],
+        dts: 'src/components.d.ts',
+      })
     ],
     css: {
       preprocessorOptions: {

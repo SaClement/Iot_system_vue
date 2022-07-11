@@ -21,7 +21,7 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "types": ["element-plus/global"]
   },
-  "include": ["vite.config.*", "src/typings/*.d.ts", "src/**/*", "src/**/*.vue", "build/**/*.ts", "mock/**/*.ts", ".env-config.ts"],
+  "include": ["vite.config.*", "src/typings/*.d.ts", "src/**/*", "src/**/*.vue", "build/**/*.ts", "mock/**/*.ts", ".env-config.ts", "src/*.d.ts"],
   "exclude": ["/dist/**", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
