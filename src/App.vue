@@ -10,7 +10,7 @@ subscribeStore();
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn" :namespace="eq">
+  <el-config-provider :locale="zhCn" namespace="ep">
     <router-view/>
   </el-config-provider>
 </template>
