@@ -5,15 +5,6 @@
  * @description 点选
  * */
 import {
-  ref,
-  watch,
-  getCurrentInstance,
-  reactive,
-  computed,
-  onMounted,
-  defineExpose,
-} from "vue";
-import {
   resetSize,
   _code_chars,
   _code_color1,

@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { setupAssets, setupElementPlus } from '@/plugins';
+import { setupAssets } from '@/plugins';
 import { setupRouter } from '@/router';
 import { setupStore } from './store';
 import { setupDirectives } from '@/directives';

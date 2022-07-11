@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { useAppStore, useThemeStore } from '@/store';
-import { useBasicLayout } from '@/composables';
-import { SoybeanLayout } from '@/package';
-import { GlobalHeader, GlobalTab, GlobalSider, GlobalContent, GlobalFooter } from '../common'; //SettingDrawer,
+import { useAppStore, useThemeStore } from "@/store";
+import { useBasicLayout } from "@/composables";
+import { SoybeanLayout } from "@/package";
+// import { SettingDrawer, GlobalHeader, GlobalTab, GlobalSider, GlobalContent, GlobalFooter } from '../common';
+import { GlobalContent } from "../common";
 
-// const app = useAppStore();
-// const theme = useThemeStore();
+const app = useAppStore();
+const theme = useThemeStore();
 
-// const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
+const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } =
+  useBasicLayout();
 </script>
 
 <template>
   <template></template>
-  <!-- <soybean-layout
+  <soybean-layout
     :mode="mode"
     :min-width="theme.layout.minWidth"
     :fixed-header-and-tab="theme.fixedHeaderAndTab"
@@ -26,19 +28,19 @@ import { GlobalHeader, GlobalTab, GlobalSider, GlobalContent, GlobalFooter } fro
     :fixed-footer="theme.footer.fixed"
   >
     <template #header>
-      <global-header v-bind="headerProps" />
+      <!-- <global-header v-bind="headerProps" /> -->
     </template>
     <template #tab>
-      <global-tab />
+      <!-- <global-tab /> -->
     </template>
     <template #sider>
-      <global-sider />
+      <!-- <global-sider /> -->
     </template>
     <global-content />
     <template #footer>
-      <global-footer />
+      <!-- <global-footer /> -->
     </template>
-  </soybean-layout> -->
+  </soybean-layout>
   <!-- <setting-drawer /> -->
 </template>
 

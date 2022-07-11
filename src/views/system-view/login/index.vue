@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue';
 import type { Component } from 'vue';
 import { EnumLoginModule } from '@/enum';
 // import { SystemLogo, DarkModeSwitch } from '@/components';
@@ -8,7 +7,6 @@ import { useAppInfo } from '@/composables';
 import { getColorPalette, mixColor } from '@/utils';
 import type { LoginModuleKey } from '@/interface';
 import { LoginBg, PwdLogin, Verifition } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
-import { ElCard } from 'element-plus'
 
 interface Props {
   /** 登录模块分类 */

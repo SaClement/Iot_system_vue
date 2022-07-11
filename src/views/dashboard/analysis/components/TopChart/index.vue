@@ -10,10 +10,6 @@ const toast = () => {
   <div>dwad1</div>
   <el-button @click="toast">El Message</el-button>
   <el-button @click="toggleDark()" type="primary">点击</el-button>
-  <el-button @click="toggleDark()" type="success">点击</el-button>
-  <el-button @click="toggleDark()" type="warning">点击</el-button>
-  <el-button @click="toggleDark()" type="danger">点击</el-button>
-  <el-button @click="toggleDark()" type="info">点击</el-button>
   <p>
     Full Example:
     <a

@@ -20,22 +20,21 @@ export default defineConfig(configEnv => {
     },
     define,
     plugins: [
-      setupVitePlugins(configEnv),
       AutoImport({
         imports: ['vue', '@vueuse/core', 'vue-router'],
+        resolvers: [ElementPlusResolver()],
         dts: 'src/auto-imports.d.ts',
       }),
       Components({
-        resolvers: [
-          ElementPlusResolver(),
-        ],
+        resolvers: [ElementPlusResolver()],
         dts: 'src/components.d.ts',
-      })
+      }),
+      setupVitePlugins(configEnv),
     ],
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "./src/styles/scss/global.scss" as *;`
+          additionalData: `@use "./src/styles/scss/index.scss" as *;`
         }
       }
     },

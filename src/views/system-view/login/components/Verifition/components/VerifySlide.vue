@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed, reactive, watch, onMounted, defineExpose } from "vue";
 import type { BoxSize } from "@/interface";
 import { aesEncrypt } from "./../utils/ase";
 import { resetSize } from "./../utils/util";
