@@ -14,6 +14,8 @@ declare module '@vue/runtime-core' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ExceptionBase: typeof import('./components/common/ExceptionBase/ExceptionBase.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     HoverContainer: typeof import('./components/common/HoverContainer/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

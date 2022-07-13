@@ -7,4 +7,4 @@ import GlobalContent from './GlobalContent/index.vue';
 // import GlobalLogo from './GlobalLogo/index.vue';
 
 // export { SettingDrawer, GlobalHeader, GlobalTab, GlobalSider, GlobalContent, GlobalFooter, GlobalLogo };
-export {  GlobalContent };
+export { GlobalContent };

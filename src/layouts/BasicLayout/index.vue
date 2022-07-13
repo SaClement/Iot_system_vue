@@ -8,8 +8,7 @@ import { GlobalContent } from "../common";
 const app = useAppStore();
 const theme = useThemeStore();
 
-const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } =
-  useBasicLayout();
+const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
 </script>
 
 <template>

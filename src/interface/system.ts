@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
-// import type { DropdownOption } from 'naive-ui';
+// import type { MenuItemProps } from 'element-plus';
 
 /** 菜单项配置 */
 export type GlobalMenuOption = {
@@ -13,8 +13,8 @@ export type GlobalMenuOption = {
 };
 
 /** 面包屑 */
-// export type GlobalBreadcrumb = DropdownOption & {
-//   key: string;
+// export type GlobalBreadcrumb = MenuItemProps & {
+//   index: string;
 //   label: string;
 //   disabled: boolean;
 //   routeName: string;

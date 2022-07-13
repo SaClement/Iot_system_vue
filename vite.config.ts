@@ -26,7 +26,9 @@ export default defineConfig(configEnv => {
         dts: 'src/auto-imports.d.ts',
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver({
+          importStyle: 'sass'
+        })],
         dts: 'src/components.d.ts',
       }),
       setupVitePlugins(configEnv),
@@ -34,7 +36,7 @@ export default defineConfig(configEnv => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "./src/styles/scss/index.scss" as *;`
+          additionalData: `@use "./src/styles/element/index.scss" as *;`
         }
       }
     },
@@ -43,7 +45,7 @@ export default defineConfig(configEnv => {
       fs: { strict: false },
       host: '0.0.0.0',
       port: 3200,
-      open: true
+      open: false
     },
     build: {
       brotliSize: false,

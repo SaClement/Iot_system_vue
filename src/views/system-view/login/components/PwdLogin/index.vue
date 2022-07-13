@@ -94,7 +94,7 @@ async function handleSubmit(formEl: FormInstance | null) {
 }
 
 .bc_btn-box {
-  .el-button {
+  .ep-button {
     flex: 1;
   }
 }

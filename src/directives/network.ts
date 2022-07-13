@@ -1,6 +1,5 @@
 import type { App, Directive } from 'vue';
 import { NETWORK_ERROR_MSG } from '@/config';
-import { ElMessage } from 'element-plus';
 
 export default function setupNetworkDirective(app: App) {
   function listenerHandler(event: MouseEvent) {

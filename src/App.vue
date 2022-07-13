@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// import { zhCN, dateZhCN } from 'naive-ui';
-// import { NaiveProvider } from '@/components';
 import { useThemeStore, subscribeStore } from '@/store';
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 

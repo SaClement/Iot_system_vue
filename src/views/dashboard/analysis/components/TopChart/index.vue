@@ -1,8 +1,9 @@
 <script setup lang='ts'>
 import { toggleDark } from '@/composables';
+import { ElMessage } from 'element-plus'
 
 const toast = () => {
-  ElMessage.warning('Error')
+  ElMessage.success('Error')
 }
 </script>
 

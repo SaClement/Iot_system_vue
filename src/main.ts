@@ -17,9 +17,6 @@ async function setupApp() {
   // 挂载自定义vue指令
   setupDirectives(app);
 
-  // // 按需引入ElementPlus组件
-  // setupElementPlus(app);
-
   // // 挂载路由
   await setupRouter(app);
 
