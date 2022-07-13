@@ -1,0 +1,1 @@
+import DefineOptions from 'unplugin-vue-define-options/vite'
