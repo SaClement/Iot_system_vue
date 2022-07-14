@@ -8,7 +8,7 @@ subscribeStore();
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn" namespace="ep">
+  <el-config-provider :locale="zhCn" namespace="ep" class="h-full">
     <router-view/>
   </el-config-provider>
 </template>
@@ -19,8 +19,5 @@ subscribeStore();
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  .bc_provider-mian{
-    height: 100%;
-  }
 }
 </style>

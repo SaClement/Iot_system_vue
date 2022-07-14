@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ 'p-16px': showPadding }"
-    class="bc_blank-component"
+    class="h-full bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out"
   >
     <router-view v-slot="{ Component, route }">
       <transition name="fade-slide" mode="out-in" appear>
@@ -28,10 +28,4 @@ withDefaults(defineProps<Props>(), {
 const app = useAppStore();
 const routeStore = useRouteStore();
 </script>
-<style lang="scss" scoped>
-.bc_blank-component{
-  height: 100%;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-</style>
+<style lang="scss" scoped></style>

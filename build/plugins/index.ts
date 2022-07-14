@@ -1,18 +1,23 @@
-import type { ConfigEnv, PluginOption } from 'vite';
+import type { PluginOption } from 'vite';
 import vue from './vue';
 import html from './html';
 import iconify from './iconify';
-// import windicss from './windicss';
+import unplugin from './unplugin';
+import unocss from './unocss';
 import mock from './mock';
-// import visualizer from './visualizer';
+import visualizer from './visualizer';
+import compress from './compress';
 
-export function setupVitePlugins(configEnv: ConfigEnv): (PluginOption | PluginOption[])[] {
-  // const plugins = [vue, html(configEnv), ...iconify, windicss, mock];
-  const plugins = [vue, html(configEnv), ...iconify, mock];
+export function setupVitePlugins(viteEnv: ImportMetaEnv): (PluginOption | PluginOption[])[] {
+  const plugins = [vue, html(viteEnv), ...unplugin, ...iconify, unocss, mock];
 
-  // if (configEnv.command === 'build') {
-  //   plugins.push(visualizer);
-  // }
+  if (viteEnv.VITE_VISUALIZER === '1') {
+    plugins.push(visualizer);
+  }
+
+  if(viteEnv.VITE_COMPRESS === '1') {
+    plugins.push(compress(viteEnv));
+  }
 
   return plugins;
 }

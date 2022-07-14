@@ -1,34 +1,27 @@
 import { Ref } from 'vue';
 import type { FormItemRule } from 'element-plus'
-import { REGEXP_PHONE, REGEXP_PWD, REGEXP_CODE_SIX, REGEXP_EMAIL } from '@/config';
+import { REGEXP_PWD } from '@/config';
 
 /** 表单规则 */
 interface CustomFormRules {
-  /** 手机号码 */
-  phone: FormItemRule[];
+  /** 用户名 */
+  username: FormItemRule[];
   /** 密码 */
-  pwd: FormItemRule[];
+  password: FormItemRule[];
   /** 验证码 */
   code: FormItemRule[];
-  /** 邮箱 */
-  email: FormItemRule[];
 }
 
 /** 表单规则 */
 export const formRules: CustomFormRules = {
-  phone: [
-    { required: true, message: '请输入手机号码' },
-    { pattern: REGEXP_PHONE, message: '手机号码格式错误', trigger: 'input' }
+  username: [
+    { required: true, message: '请输入用户名' },
   ],
-  pwd: [
+  password: [
     { required: true, message: '请输入密码' },
     { pattern: REGEXP_PWD, message: '密码为8-18位数字/字符/符号，至少2种组合', trigger: 'input' }
   ],
-  code: [
-    { required: true, message: '请输入验证码' },
-    { pattern: REGEXP_CODE_SIX, message: '验证码格式错误', trigger: 'input' }
-  ],
-  email: [{ pattern: REGEXP_EMAIL, message: '邮箱格式错误', trigger: 'blur' }]
+  code: []
 };
 
 /** 获取确认密码的表单规则 */

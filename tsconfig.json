@@ -19,9 +19,14 @@
 			"~/*": ["./*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "types": ["element-plus/global"]
+    "types": [
+      "vite/client",
+      "node",
+      "element-plus/global",
+      "unplugin-icons/types/vue"
+    ]
   },
-  "include": ["vite.config.*", "src/typings/*.d.ts", "src/**/*", "src/**/*.vue", "build/**/*.ts", "mock/**/*.ts", ".env-config.ts", "src/*.d.ts"],
+  // "include": ["vite.config.*", "src/typings/**/*.d.ts", "src/**/*", "src/**/*.vue", "build/**/*.ts", "mock/**/*.ts", ".env-config.ts", "src/*.d.ts"],
   "exclude": ["/dist/**", "node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  // "references": [{ "path": "./tsconfig.node.json" }]
 }

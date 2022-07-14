@@ -6,7 +6,8 @@ import { useThemeStore } from '@/store';
 import { useAppInfo } from '@/composables';
 import { getColorPalette, mixColor } from '@/utils';
 import type { LoginModuleKey } from '@/interface';
-import { LoginBg, PwdLogin, Verifition } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
+import { LoginBg, PwdLogin } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
+import { ElLoading } from 'element-plus';
 
 interface Props {
   /** 登录模块分类 */
@@ -52,30 +53,26 @@ const bgColor = computed(() => {
 
 const loginBox = ref(null)
 
-function handleLogin() {
-
-}
-
 onMounted(() => {
   console.log(loginBox)
 })
 </script>
 
 <template>
-  <div class="bc_login-box" :style="{ backgroundColor: bgColor }">
+  <div class="relative flex-center wh-full" :style="{ backgroundColor: bgColor }">
     <!-- <dark-mode-switch
       :dark="theme.darkMode"
       class="absolute left-48px top-24px z-3 text-20px"
       @update:dark="theme.setDarkMode"
     /> -->
-    <el-card class="box-card">
-      <div class="bc_login-main">
-        <header class="bc_login-header">
+    <el-card class="z-4 !w-auto rounded-20px shadow-sm">
+      <div class="w-300px sm:w-360px">
+        <header class="flex-y-center justify-between">
           <p class="bc_gradient-text">{{ title }}</p>
         </header>
-        <main class="bc_form-main">
-          <h3 class="bc_form-title">{{ activeModule.label }}</h3>
-          <div class="bc_form-main">
+        <main class="pt-24px">
+          <h3 class="text-18px text-primary font-medium">{{ activeModule.label }}</h3>
+          <div class="pt-24px">
             <transition name="fade-slide" mode="out-in" appear>
               <component :is="activeModule.component" />
             </transition>
@@ -85,69 +82,22 @@ onMounted(() => {
     </el-card>
 
     <login-bg :theme-color="bgThemeColor" ref="loginBox"/>
-
-    <verifition 
-      @success="handleLogin"
-      :mode="'fixed'"
-      :explain="'向右滑动验证登录'"
-      :captchaType="'blockPuzzle'"
-      :imgSize="{width:'340px',height:'200px'}"
-      ref="verify">
-    </verifition>
   </div>
 </template>
 
 <style lang='scss' scoped>
 $--s-color-start: #1890ff99;
 $--s-color-end: #1890ff99;
-
-.bc_login-box {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  .box-card{
-    position: relative;
-    margin-right: 15vw;
-    border-radius: 20px;
-    background-color: #eeeeee; 
-    z-index: 12;
-  }
-
-  .bc_login-main{
-    width: 360px;
-
-    .bc_login-header{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .bc_gradient-text{
-        margin: 0;
-        display: inline-block;
-        font-size: 28px;
-        font-weight: 500;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: #0000;
-        white-space: nowrap;
-        background-image: linear-gradient(252deg, #1890ff99 0%, #1890ff 100%);
-        transition: --s-color-start .3s cubic-bezier(0.4, 0, 0.2, 1), --s-color-end .3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-    }
-  }
-
-  .bc_form-main {
-    padding-top: 24px;
-    .bc_form-title{
-      font-size: 18px;
-      line-height: 1;
-      color: #1890ff;
-      font-weight: 500;
-    }
-  }
+.bc_gradient-text{
+  margin: 0 auto;
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 500;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #0000;
+  white-space: nowrap;
+  background-image: linear-gradient(252deg, #1890ff99 0%, #1890ff 100%);
+  transition: --s-color-start .3s cubic-bezier(0.4, 0, 0.2, 1), --s-color-end .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

@@ -1,9 +1,12 @@
 <script setup lang='ts'>
 import { toggleDark } from '@/composables';
+import { useAuthStore } from '@/store';
 import { ElMessage } from 'element-plus'
 
+const auth = useAuthStore();
+
 const toast = () => {
-  ElMessage.success('Error')
+  auth.resetAuthStore();
 }
 </script>
 

@@ -76,9 +76,6 @@ const barAreaColor = ref<any | string>(undefined);
 const barAreaBorderColor = ref<any | string>(undefined);
 const bindingClick = ref<boolean>(true);
 const showRefresh = ref<boolean>(true);
-const resetSizeNode = computed(() => {
-  return resetSize;
-});
 const verifyCanvas = computed(() => {
   return barArea.value;
 });
@@ -89,10 +86,7 @@ function init() {
   checkPosArr.splice(0, checkPosArr.length);
   num.value = 1;
   getPictrue();
-  // nextTick(() => {
-  //   setSize = resetSize(verifyPoints); //重新设置宽度高度
-  //   verifyPoints.value.emit("ready", verifyPoints);
-  // });
+  setSize = resetSize(verifyPoints); //重新设置宽度高度
 }
 
 function canvasClick(e: MouseEvent) {
@@ -107,41 +101,41 @@ function canvasClick(e: MouseEvent) {
       //发送后端请求
       var captchaVerification = secretKey
         ? aesEncrypt(
-            backToken + "---" + JSON.stringify(checkPosArr),
+            backToken.value + "---" + JSON.stringify(checkPosArr),
             secretKey.value
           )
-        : backToken + "---" + JSON.stringify(checkPosArr);
+        : backToken.value + "---" + JSON.stringify(checkPosArr);
       let data = {
         captchaType: props.captchaType,
         pointJson: secretKey
           ? aesEncrypt(JSON.stringify(checkPosArr), secretKey.value)
           : JSON.stringify(checkPosArr),
-        token: backToken,
+        token: backToken.value,
       };
-      fetchReqCheck(data).then((result) => {
-        let res = result.data;
-        // if (res && res.repCode == "0000") {
-        //   barAreaColor.value = "#4cae4c";
-        //   barAreaBorderColor.value = "#5cb85c";
-        //   text.value = "验证成功";
-        //   bindingClick.value = false;
-        //   if (props.mode == "pop") {
-        //     setTimeout(() => {
-        //       proxy.parent.clickShow = false;
-        //       refresh();
-        //     }, 1500);
-        //   }
-        //   proxy.parent.emit("success", { captchaVerification });
-        // } else {
-        //   proxy.parent.emit("error", proxy);
-        //   barAreaColor.value = "#d9534f";
-        //   barAreaBorderColor.value = "#d9534f";
-        //   text.value = "验证失败";
-        //   setTimeout(() => {
-        //     refresh();
-        //   }, 700);
-        // }
-      });
+      // fetchReqCheck(data).then((result) => {
+      //   let res = result.data;
+      //   if (res && res.repCode == "0000") {
+      //     barAreaColor.value = "#4cae4c";
+      //     barAreaBorderColor.value = "#5cb85c";
+      //     text.value = "验证成功";
+      //     bindingClick.value = false;
+      //     if (props.mode == "pop") {
+      //       setTimeout(() => {
+      //         proxy.parent.clickShow = false;
+      //         refresh();
+      //       }, 1500);
+      //     }
+      //     proxy.parent.emit("success", { captchaVerification });
+      //   } else {
+      //     proxy.parent.emit("error", proxy);
+      //     barAreaColor.value = "#d9534f";
+      //     barAreaBorderColor.value = "#d9534f";
+      //     text.value = "验证失败";
+      //     setTimeout(() => {
+      //       refresh();
+      //     }, 700);
+      //   }
+      // });
     }, 400);
   }
   if (num < checkNum) {
@@ -180,18 +174,18 @@ function getPictrue() {
   let data = {
     captchaType: props.captchaType,
   };
-  fetchReqGet(data).then((result) => {
-    let res = result.data;
-    // if (res && res.token == "0000") {
-    //   pointBackImgBase.value = res.token.originalImageBase64;
-    //   backToken.value = res.token.token;
-    //   secretKey.value = res.token.secretKey;
-    //   poinTextList = res.token.wordList;
-    //   text.value = "请依次点击【" + poinTextList.join(",") + "】";
-    // } else {
-    //   text.value = res.repMsg;
-    // }
-  });
+  // fetchReqGet(data).then((result) => {
+  //   let res = result.data;
+  //   if (res && res.repCode == "0000") {
+  //     pointBackImgBase.value = res.token.originalImageBase64;
+  //     backToken.value = res.token.token;
+  //     secretKey.value = res.token.secretKey;
+  //     poinTextList = res.token.wordList;
+  //     text.value = "请依次点击【" + poinTextList.join(",") + "】";
+  //   } else {
+  //     text.value = res.repMsg;
+  //   }
+  // });
 }
 
 //坐标转换函数
@@ -225,7 +219,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div style="position: relative">
+  <div style="position: relative" ref="verifyPoints">
     <div class="verify-img-out">
       <div
         class="verify-img-panel"

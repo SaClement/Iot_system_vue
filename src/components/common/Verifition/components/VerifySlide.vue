@@ -220,60 +220,60 @@ function end() {
         : JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
       token: backToken,
     };
-    fetchReqGet(data).then((result) => {
-      let res = result.data;
-      //   if (res && res.repCode == "0000") {
-      //     moveBlockBackgroundColor.value = "#5cb85c";
-      //     leftBarBorderColor.value = "#5cb85c";
-      //     iconColor.value = "#fff";
-      //     iconClass.value = "icon-check";
-      //     showRefresh.value = false;
-      //     isEnd.value = true;
-      //     if (props.mode == "pop") {
-      //       setTimeout(() => {
-      //         verifySlide?.proxy?.$parent.clickShow = false;
-      //         refresh();
-      //       }, 1500);
-      //     }
-      //     passFlag.value = true;
-      //     tipWords.value = `${(
-      //       (Number(endMovetime.value) - Number(startMoveTime.value)) /
-      //       1000
-      //     ).toFixed(2)}s验证成功`;
-      //     var captchaVerification = secretKey.value
-      //       ? aesEncrypt(
-      //           backToken.value +
-      //             "---" +
-      //             JSON.stringify({
-      //               x: moveLeftDistance,
-      //               y: 5.0,
-      //             }),
-      //           secretKey.value
-      //         )
-      //       : backToken.value +
-      //         "---" +
-      //         JSON.stringify({ x: moveLeftDistance, y: 5.0 });
-      //     setTimeout(() => {
-      //       tipWords.value = "";
-      //       verifySlide?.closeBox();
-      //       verifySlide?.emit("success", { captchaVerification });
-      //     }, 1000);
-      //   } else {
-      //     moveBlockBackgroundColor.value = "#d9534f";
-      //     leftBarBorderColor.value = "#d9534f";
-      //     iconColor.value = "#fff";
-      //     iconClass.value = "icon-close";
-      //     passFlag.value = false;
-      //     setTimeout(function () {
-      //       refresh();
-      //     }, 1000);
-      //     verifySlide?.emit("error", verifySlide);
-      //     tipWords.value = "验证失败";
-      //     setTimeout(() => {
-      //       tipWords.value = "";
-      //     }, 1000);
-      // }
-    });
+    // fetchReqGet(data).then((result) => {
+    //   let res = result.data;
+    //     if (res && res.repCode == "0000") {
+    //       moveBlockBackgroundColor.value = "#5cb85c";
+    //       leftBarBorderColor.value = "#5cb85c";
+    //       iconColor.value = "#fff";
+    //       iconClass.value = "icon-check";
+    //       showRefresh.value = false;
+    //       isEnd.value = true;
+    //       if (props.mode == "pop") {
+    //         setTimeout(() => {
+    //           verifySlide?.proxy?.$parent.clickShow = false;
+    //           refresh();
+    //         }, 1500);
+    //       }
+    //       passFlag.value = true;
+    //       tipWords.value = `${(
+    //         (Number(endMovetime.value) - Number(startMoveTime.value)) /
+    //         1000
+    //       ).toFixed(2)}s验证成功`;
+    //       var captchaVerification = secretKey.value
+    //         ? aesEncrypt(
+    //             backToken.value +
+    //               "---" +
+    //               JSON.stringify({
+    //                 x: moveLeftDistance,
+    //                 y: 5.0,
+    //               }),
+    //             secretKey.value
+    //           )
+    //         : backToken.value +
+    //           "---" +
+    //           JSON.stringify({ x: moveLeftDistance, y: 5.0 });
+    //       setTimeout(() => {
+    //         tipWords.value = "";
+    //         verifySlide?.closeBox();
+    //         verifySlide?.emit("success", { captchaVerification });
+    //       }, 1000);
+    //     } else {
+    //       moveBlockBackgroundColor.value = "#d9534f";
+    //       leftBarBorderColor.value = "#d9534f";
+    //       iconColor.value = "#fff";
+    //       iconClass.value = "icon-close";
+    //       passFlag.value = false;
+    //       setTimeout(function () {
+    //         refresh();
+    //       }, 1000);
+    //       verifySlide?.emit("error", verifySlide);
+    //       tipWords.value = "验证失败";
+    //       setTimeout(() => {
+    //         tipWords.value = "";
+    //       }, 1000);
+    //   }
+    // });
     status.value = false;
   }
 }
@@ -307,8 +307,8 @@ function getPictrue() {
   let data = {
     captchaType: props.captchaType,
   };
-  fetchReqGet(data).then((result) => {
-    let res = result.data;
+  // fetchReqGet(data).then((result) => {
+  //   let res = result.data;
     // if (res?.code == "0000") {
     //   backImgBase.value = res.repData.originalImageBase64;
     //   blockBackImgBase.value = res.repData.jigsawImageBase64;
@@ -317,7 +317,7 @@ function getPictrue() {
     // } else {
     //   tipWords.value = res.repMsg;
     // }
-  });
+  // });
 }
 
 watch(

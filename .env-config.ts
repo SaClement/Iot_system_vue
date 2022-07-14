@@ -1,22 +1,29 @@
 /** 请求环境配置 */
-type ServiceEnv = Record<
-  Service.HttpEnv,
-  {
-    /** 请求环境 */
-    env: Service.HttpEnv;
-    /** 请求地址 */
-    url: string;
-  }
->;
+type ServiceEnv = Record<EnvType, EnvConfig>;
 
-/** 请求的环境 */
-export const serviceEnv: ServiceEnv = {
+/** 请求的环境配置 */
+const serviceEnvConfig: ServiceEnv = {
+  dev: {
+    url: 'http://localhost:8080',
+    proxy: '/api'
+  },
   test: {
-    env: 'test',
-    url: 'http://47.105.88.139:16509'
+    url: 'http://localhost:8080',
+    proxy: '/api'
   },
   prod: {
-    env: 'prod',
-    url: 'http://47.105.80.201:9001'
+    url: 'http://localhost:8080',
+    proxy: '/api'
   }
 };
+
+/**
+ * 获取环境配置
+ * @param env 环境描述
+ * @returns 
+ */
+export function getEnvConfig(env: ImportMetaEnv) {
+  const { VITE_ENV_TYPE = 'dev' } = env;
+  const envConfig = serviceEnvConfig[VITE_ENV_TYPE];
+  return envConfig;
+}

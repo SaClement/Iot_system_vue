@@ -76,13 +76,13 @@ export const useAuthStore = defineStore('auth-store', {
     },
     /**
      * 登录
-     * @param phone - 手机号
-     * @param pwdOrCode - 密码或验证码
-     * @param type - 登录方式: pwd - 密码登录; sms - 验证码登录
+     * @param username - 手机号
+     * @param password - 密码
+     * @param code - 验证码
      */
-    async login(phone: string, pwdOrCode: string, type: 'pwd' | 'sms') {
-      this.loginLoding = true;
-      const { data } = await fetchLogin(phone, pwdOrCode, type);
+    async login(username: string, password: string, code: string) {
+      // this.loginLoding = true;
+      const { data } = await fetchLogin(username, password, code);
       if (data) {
         await this.loginByToken(data);
       }

@@ -42,12 +42,12 @@ const props = withDefaults(defineProps<Props>(), {
   },
 });
 
-const instance = ref(null);
+const instance = ref<HTMLElement>();
 const clickShow = ref(false);
 const verifyType = ref<string>("");
 const showBox = computed(() => (props.mode == "pop" ? clickShow : true));
 const componentType = computed(() => {
-  return props.captchaType == "blockPuzzle" ? VerifySlide : VerifyPoints;
+  props.captchaType == "blockPuzzle" ? VerifySlide : VerifyPoints;
 });
 
 function closeBox() {
@@ -57,7 +57,7 @@ function closeBox() {
 
 function refresh() {
   if (instance.value) {
-    (instance.value as any).refresh();
+    instance.value.refresh();
   }
 }
 
@@ -74,7 +74,9 @@ watch(
     }
   }
 );
-onMounted(() => {});
+onMounted(() => {
+  console.log(instance.value);
+});
 </script>
 
 <template>
@@ -96,7 +98,7 @@ onMounted(() => {});
         <!-- 验证码容器 -->
         <keep-alive>
           <component
-            v-if="componentType"
+            v-if="props.captchaType"
             :is="componentType"
             :captchaType="captchaType"
             :type="verifyType"
