@@ -1,10 +1,10 @@
 <template>
-  <n-dropdown :options="options" @select="handleDropdown">
+  <el-dropdown :options="options" @select="handleDropdown">
     <hover-container class="px-12px">
       <img :src="avatar" class="w-32px h-32px" />
       <span class="pl-8px text-16px font-medium">{{ auth.userInfo.userName }}</span>
     </hover-container>
-  </n-dropdown>
+  </el-dropdown>
 </template>
 
 <script lang="ts" setup>

@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { useThemeStore, subscribeStore } from '@/store';
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { useThemeStore, subscribeStore, useAuthStore } from '@/store';
+import { useI18n } from 'vue-i18n';
+import { languageJson } from './i18n';
+import { getLanguage } from './utils';
 
+// const { t } = useI18n()
 const theme = useThemeStore();
+const auth = useAuthStore();
+const locale = computed(() => languageJson[auth.language].el);
 
 subscribeStore();
+
+onMounted(() => {
+  console.log(locale)
+})
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn" namespace="ep" class="h-full">
-    <router-view/>
+  <el-config-provider :locale="locale" namespace="ep" class="h-full">
+    <router-view />
   </el-config-provider>
 </template>
 

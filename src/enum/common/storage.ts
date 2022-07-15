@@ -8,5 +8,7 @@ export enum EnumStorageKey {
   /** 用户信息 */
   'user-info' = '__USER_INFO__',
   /** 多页签路由信息 */
-  'tab-routes' = '__TAB_ROUTES__'
+  'tab-routes' = '__TAB_ROUTES__',
+  /** 用户语言 */
+  'language' = '__LANGUAGE__'
 }

@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { router as globalRouter } from '@/router';
 import { useRouterPush } from '@/composables';
 import { fetchLogin, fetchUserInfo } from '@/service';
-import { getUserInfo, getToken, setUserInfo, setToken, setRefreshToken, clearAuthStorage } from '@/utils'; // 工具（获取用户信息，获取token，设置用户信息，设置token，设置异步token，清除用户缓存）
+import { getUserInfo, getToken, setUserInfo, setToken, setRefreshToken, clearAuthStorage, getLanguage, setLanguage } from '@/utils'; // 工具（获取用户信息，获取token，设置用户信息，设置token，设置异步token，清除用户缓存）
 
 interface AuthState {
   /** 用户信息 */
@@ -12,13 +12,16 @@ interface AuthState {
   token: string;
   /** 登录的加载状态 */
   loginLoding: boolean;
+  /** 用户语言 */
+  language: string;
 }
 
 export const useAuthStore = defineStore('auth-store', {
   state: (): AuthState => ({
     userInfo: getUserInfo(),
     token: getToken(),
-    loginLoding: false
+    loginLoding: false,
+    language: getLanguage()
   }),
   getters: {
     /** 是否登录 */
@@ -87,6 +90,15 @@ export const useAuthStore = defineStore('auth-store', {
         await this.loginByToken(data);
       }
       this.loginLoding = false;
-    }
+    },
+    
+    /**
+     * 设置用户语言
+     * @param locale 
+     */
+    setAuthLanguage(locale: string) {
+			this.language = locale
+			setLanguage(locale)
+		},
   }
 });

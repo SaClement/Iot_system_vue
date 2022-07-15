@@ -6,14 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DarkModeContainer: typeof import('./../components/common/DarkModeContainer/index.vue')['default']
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElForm: typeof import('element-plus/es')['ElForm']
-    ElFormItem: typeof import('element-plus/es')['ElFormItem']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    ElSpace: typeof import('element-plus/es')['ElSpace']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     HoverContainer: typeof import('./../components/common/HoverContainer/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

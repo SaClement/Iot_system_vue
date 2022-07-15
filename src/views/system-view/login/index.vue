@@ -7,7 +7,6 @@ import { useAppInfo } from '@/composables';
 import { getColorPalette, mixColor } from '@/utils';
 import type { LoginModuleKey } from '@/interface';
 import { LoginBg, PwdLogin } from './components'; // LoginBg, CodeLogin, Register, ResetPwd, BindWechat
-import { ElLoading } from 'element-plus';
 
 interface Props {
   /** 登录模块分类 */
@@ -51,27 +50,27 @@ const bgColor = computed(() => {
   return mixColor(COLOR_WHITE, theme.themeColor, ratio);
 });
 
-const loginBox = ref(null)
+const loginBox = ref<HTMLElement>()
 
 onMounted(() => {
-  console.log(loginBox)
+  // console.log(loginBox.value)
 })
 </script>
 
 <template>
-  <div class="relative flex-center wh-full" :style="{ backgroundColor: bgColor }">
+  <div class="relative flex justify-end items-center wh-full" :style="{ backgroundColor: bgColor }">
     <!-- <dark-mode-switch
       :dark="theme.darkMode"
       class="absolute left-48px top-24px z-3 text-20px"
       @update:dark="theme.setDarkMode"
     /> -->
-    <el-card class="z-4 !w-auto rounded-20px shadow-sm">
+    <el-card class="z-4 !w-auto rounded-20px shadow-sm mr-36">
       <div class="w-300px sm:w-360px">
         <header class="flex-y-center justify-between">
           <p class="bc_gradient-text">{{ title }}</p>
         </header>
         <main class="pt-24px">
-          <h3 class="text-18px text-primary font-medium">{{ activeModule.label }}</h3>
+          <h3 class="text-18px text-primary font-medium m-0">{{ activeModule.label }}</h3>
           <div class="pt-24px">
             <transition name="fade-slide" mode="out-in" appear>
               <component :is="activeModule.component" />

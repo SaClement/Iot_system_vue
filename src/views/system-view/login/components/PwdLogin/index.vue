@@ -7,8 +7,8 @@ import { formRules } from "@/utils";
 // import { OtherLogin } from './components';
 
 type Verification = {
-  captchaVerification: string
-}
+  captchaVerification: string;
+};
 
 const auth = useAuthStore();
 const { login } = useAuthStore();
@@ -18,24 +18,24 @@ const formRef = ref<FormInstance | null>(null);
 const model = reactive({
   username: "liugaobo",
   password: "Poick#147",
-  code: ""
+  code: "",
 });
 const rules: FormRules = {
   username: formRules.username,
   password: formRules.password,
-  code: formRules.code
+  code: formRules.code,
 };
 const rememberMe = ref(false);
 const verifitionShow = ref(false);
-const loadingInstance = ElLoading.service({
-  text: "登录中...",
-})
+// const loadingInstance = ElLoading.service({
+//   text: "登录中...",
+// })
 
 async function handleSubmit(formEl: FormInstance | null) {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      verifitionShow.value = true
+      verifitionShow.value = true;
     } else {
       console.log(fields);
     }
@@ -44,15 +44,23 @@ async function handleSubmit(formEl: FormInstance | null) {
 
 function handleLogin(params: Verification) {
   model.code = params.captchaVerification;
+  // loadingInstance.close();
   const { username, password, code } = model;
   login(username, password, code);
-  verifitionShow.value = false
-  loadingInstance.close();
+  verifitionShow.value = false;
 }
 </script>
 
 <template>
-  <el-form ref="formRef" :model="model" :rules="rules" size="large">
+  <el-form
+    ref="formRef"
+    :model="model"
+    :rules="rules"
+    size="large"
+    label-width="60px"
+    :hide-required-asterisk="true"
+    class="relactive"
+  >
     <el-form-item prop="username" label="用户名">
       <el-input v-model="model.username" placeholder="请输入用户名" />
     </el-form-item>
@@ -64,21 +72,10 @@ function handleLogin(params: Verification) {
         placeholder="请输入密码"
       />
     </el-form-item>
-    <el-space
-      fill
-      wrap
-      direction="vertical"
-      style="width: 100%"
-      class="bc_space-mian"
-    >
-      <div class="bc_space-box">
+    <el-space fill wrap direction="vertical" class="w-full">
+      <div class="flex-y-center justify-between">
         <el-checkbox @checked="rememberMe">记住我</el-checkbox>
-        <el-button
-          :text="true"
-          :plain="true"
-          @click="toLoginModule('reset-pwd')"
-          >忘记密码？</el-button
-        >
+        <el-button link :plain="true" @click="toLoginModule('reset-pwd')" class="w-50px">忘记密码？</el-button>
       </div>
       <el-button
         type="primary"
@@ -89,42 +86,33 @@ function handleLogin(params: Verification) {
       >
         确定
       </el-button>
-      <!-- <div class="bc_space-box bc_btn-box">
-        <el-button  @click="toLoginModule('code-login')">
-          {{ EnumLoginModule['code-login'] }}
+      <div class="flex justify-between items-center">
+        <el-button @click="toLoginModule('code-login')">
+          {{ EnumLoginModule["code-login"] }}
         </el-button>
-        <div style="width:12px"></div>
-        <el-button  @click="toLoginModule('register')">
+        <div style="width: 12px"></div>
+        <el-button @click="toLoginModule('register')">
           {{ EnumLoginModule.register }}
         </el-button>
-      </div> -->
+      </div>
+      <div class="not-sr-only flex justify-center items-center wh-full">
+        <verifition
+          @success="handleLogin"
+          :mode="'fixed'"
+          :explain="'向右滑动验证登录'"
+          :captchaType="'blockPuzzle'"
+          :imgSize="{ width: '340px', height: '200px' }"
+          ref="verify"
+        >
+        </verifition>
+      </div>
     </el-space>
     <!-- <other-login /> -->
-    <verifition 
-      @success="handleLogin"
-      :mode="'fixed'"
-      :explain="'向右滑动验证登录'"
-      :captchaType="'blockPuzzle'"
-      :imgSize="{width:'340px',height:'200px'}"
-      ref="verify">
-    </verifition>
   </el-form>
 </template>
 
 <style lang='scss' scoped>
-.bc_space-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.bc_btn-box {
-  .ep-button {
-    flex: 1;
-  }
-}
-
-.bc_block-button {
-  width: 100%;
+.ep-button {
+  flex: 1;
 }
 </style>

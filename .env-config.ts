@@ -4,7 +4,7 @@ type ServiceEnv = Record<EnvType, EnvConfig>;
 /** 请求的环境配置 */
 const serviceEnvConfig: ServiceEnv = {
   dev: {
-    url: 'http://localhost:8080',
+    url: 'http://192.168.1.152:9001',
     proxy: '/api'
   },
   test: {

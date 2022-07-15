@@ -9,8 +9,6 @@ import { ElLoading } from 'element-plus';
 export function createRouterGuard(router: Router) {
   const loadingbar = ElLoading.service({ fullscreen: true })
   router.beforeEach(async (to, from, next) => {
-    // 开始 loadingBar
-    loadingbar
     // 页面跳转权限处理
     await createPermissionGuard(to, from, next, router);
   });

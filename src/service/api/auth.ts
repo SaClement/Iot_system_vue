@@ -43,10 +43,10 @@ export function fetchUpdateToken(refreshToken: string) {
 
 //获取验证图片  以及token
 export function fetchReqGet(data: any) {
-  return mockRequest.post<ApiAuth.Token>('/captcha/get', data);
+  return request.post<ApiAuth.Token>('/captcha/get', data);
 }
 
 //滑动或者点选验证
 export function fetchReqCheck(data: any) {
-  return mockRequest.post<ApiAuth.Token>('/captcha/check', data);
+  return request.post<ApiAuth.Token>('/captcha/check', data);
 }

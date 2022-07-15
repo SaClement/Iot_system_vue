@@ -24,6 +24,7 @@ type CaptchaType = "blockPuzzle" | "clickWord" | null
 
 interface Props {
   locale?: string;
+  type: string;
   captchaType: CaptchaType;
   figure?: number | null;
   arith?: number | null;
